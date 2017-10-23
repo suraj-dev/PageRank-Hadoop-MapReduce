@@ -9,6 +9,10 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/*
+ * This class handles the configuration of the job for Initial Computation that computes the total number of nodes and also
+ * identifies dangling nodes
+ */
 public class InitialComputationJobConfig {
 	public static long compute(String input, String output) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();

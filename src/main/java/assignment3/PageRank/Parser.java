@@ -13,6 +13,9 @@ import org.apache.log4j.BasicConfigurator;
 
 import assignment3.PageRank.Driver;
 
+/*
+ * This class holds the configuration for the job that runs the SAX XML parser
+ */
 public class Parser {
 	public static String parseXML(String[] args) {
 		BasicConfigurator.configure();

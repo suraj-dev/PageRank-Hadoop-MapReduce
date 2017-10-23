@@ -8,6 +8,9 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/*
+ * this class contains the job configuration for computing the Page Rank.
+ */
 public class PageRankJobConfig {
 	
 	public static Double computePageRank(String input, String output, long noOfNodes, double delta)
@@ -16,7 +19,7 @@ public class PageRankJobConfig {
 		// Set Number of nodes value from the previous job.
 		conf1.setLong("noOfNodes", noOfNodes);
 		// Set the delta value of the previous iteration.
-		conf1.setDouble("runningDelta", delta);
+		conf1.setDouble("PREVIOUS_DELTA", delta);
 		Job job = Job.getInstance(conf1, "pageRankComputationJob");
 
 		job.setJarByClass(Driver.class);
@@ -41,8 +44,7 @@ public class PageRankJobConfig {
 
 		job.waitForCompletion(true);
 	
-		// Get the value of delta accumulated in the current iteration and send it back to the 
-		// driver, so that it can be used in the next iteration.
+		// retrieve the running delta value accumulated from this job
 		Double runningDelta = job.getCounters().findCounter(Driver.counters.RUNNING_DELTA).getValue() / Math.pow(10,10);
 	
 		return runningDelta;
